@@ -8,7 +8,7 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>quarkus-jgrapht-integration-tests</artifactId>
-  <name>Quarkus - Jgrapht - Integration Tests</name>
+  <name>Quarkus - JGraphT - Integration Tests</name>
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>

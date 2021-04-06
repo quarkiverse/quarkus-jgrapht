@@ -8,7 +8,7 @@
     <version>1.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>quarkus-jgrapht-deployment</artifactId>
-  <name>Quarkus - Jgrapht - Deployment</name>
+  <name>Quarkus - JGraphT - Deployment</name>
   <dependencies>
     <dependency>
       <groupId>io.quarkus</groupId>

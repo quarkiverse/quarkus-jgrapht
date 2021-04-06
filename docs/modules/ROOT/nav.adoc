@@ -1,1 +1,1 @@
-* xref:index.adoc[Quarkus - Jgrapht]
+* xref:index.adoc[Quarkus - JGraphT]

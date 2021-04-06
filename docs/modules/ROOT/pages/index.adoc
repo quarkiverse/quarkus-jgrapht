@@ -1,4 +1,4 @@
-= Quarkus - Jgrapht
+= Quarkus - JGraphT
 :extension-status: preview
 
 Describe what the extension does here.
