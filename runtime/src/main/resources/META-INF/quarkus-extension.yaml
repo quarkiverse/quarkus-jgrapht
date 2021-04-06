@@ -1,9 +1,10 @@
-name: Jgrapht
-#description: Jgrapht ...
+name: JGraphT
+description: "JGraphT - a Java library of graph theory data structures and algorithms"
 metadata:
-#  keywords:
-#    - jgrapht
-#  guide: ...
-#  categories:
-#    - "miscellaneous"
-#  status: "preview"
+  keywords:
+    - jgrapht
+    - graphs
+  guide: "https://jgrapht.org/guide/UserOverview"
+  categories:
+    - "miscellaneous"
+  status: "preview"
