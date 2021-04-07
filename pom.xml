@@ -18,6 +18,7 @@
   </modules>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
+    <jgrapht.version>1.5.1</jgrapht.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -33,6 +34,11 @@
         <version>${quarkus.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.jgrapht</groupId>
+        <artifactId>jgrapht-io</artifactId>
+        <version>${jgrapht.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
