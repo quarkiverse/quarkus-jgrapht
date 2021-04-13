@@ -4,8 +4,11 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -121,5 +124,69 @@ public class JgraphtResourceTest {
                 .statusCode(200)
                 .body(equalTo(
                         "[(1,2,1.0), (1,4,2.0), (1,7,3.0), (1,9,4.0), (2,3,5.0), (2,6,6.0), (2,8,7.0), (3,5,8.0), (3,7,9.0), (3,10,10.0), (4,5,11.0), (4,6,12.0), (4,10,13.0), (5,8,14.0), (5,9,15.0), (6,11,16.0), (7,11,17.0), (8,11,18.0), (9,11,19.0), (10,11,20.0)]"));
+    }
+
+    private static final String GEXF_DEFINITION = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+            + "<gexf xmlns=\"http://www.gexf.net/1.2draft\" "
+            + "      version=\"1.2\" "
+            + "      xsi:schemaLocation=\"http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd\" "
+            + "      xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n"
+            + "<meta>\n"
+            + "  <creator>The JGraphT Library</creator>\n"
+            + "  <description>Test</description>\n"
+            + "</meta>\n"
+            + "<graph defaultedgetype=\"undirected\">\n"
+            + "  <attributes class=\"node\">\n"
+            + "    <attribute id=\"0\" title=\"color\" type=\"string\"/>\n"
+            + "    <attribute id=\"1\" title=\"city\" type=\"string\"/>\n"
+            + "  </attributes>\n"
+            + "  <attributes class=\"edge\">\n"
+            + "    <attribute id=\"0\" title=\"length\" type=\"double\"/>\n"
+            + "  </attributes>\n"
+            + "  <nodes>\n"
+            + "    <node id=\"0\" label=\"0\">\n"
+            + "      <attvalues>\n"
+            + "        <attvalue for=\"0\" value=\"Red\"/>\n"
+            + "        <attvalue for=\"1\" value=\"Paris\"/>\n"
+            + "      </attvalues>\n"
+            + "    </node>\n"
+            + "    <node id=\"1\" label=\"1\"/>\n"
+            + "    <node id=\"2\" label=\"2\"/>\n"
+            + "  </nodes>\n"
+            + "  <edges>\n"
+            + "    <edge id=\"0\" source=\"0\" target=\"1\" type=\"undirected\" weight=\"1.0\">\n"
+            + "      <attvalues>\n"
+            + "        <attvalue for=\"0\" value=\"100.0\"/>\n"
+            + "      </attvalues>\n"
+            + "    </edge>\n"
+            + "    <edge id=\"1\" source=\"2\" target=\"0\" type=\"undirected\" weight=\"13.5\">\n"
+            + "      <attvalues>\n"
+            + "        <attvalue for=\"0\" value=\"30.0\"/>\n"
+            + "      </attvalues>\n"
+            + "    </edge>\n"
+            + "  </edges>\n"
+            + "</graph>\n"
+            + "</gexf>\n";
+
+    @Test
+    public void testGEXFExport() {
+        String responseString = given()
+                .when().get("/jgrapht/gexf/export")
+                .then()
+                .statusCode(200)
+                .extract()
+                .asString();
+        Diff diff = DiffBuilder.compare(responseString).withTest(GEXF_DEFINITION).ignoreWhitespace().checkForIdentical()
+                .build();
+        assertFalse(diff.hasDifferences(), "XML files are not identical");
+    }
+
+    @Test
+    public void testGEXFImport() {
+        given()
+                .when().get("/jgrapht/gexf/import")
+                .then()
+                .statusCode(200)
+                .body(equalTo("([0, 1, 2], [{1,2}, {0,1}, {2,0}])"));
     }
 }
