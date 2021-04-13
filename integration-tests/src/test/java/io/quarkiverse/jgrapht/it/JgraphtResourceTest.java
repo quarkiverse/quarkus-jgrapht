@@ -189,4 +189,14 @@ public class JgraphtResourceTest {
                 .statusCode(200)
                 .body(equalTo("([0, 1, 2], [{1,2}, {0,1}, {2,0}])"));
     }
+
+    @Test
+
+    public void testBrokenGEXFImport() {
+        given()
+                .when().get("/jgrapht/gexf/import/broken")
+                .then()
+                .statusCode(200)
+                .body(equalTo("OK"));
+    }
 }

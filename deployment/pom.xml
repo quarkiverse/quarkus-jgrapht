@@ -15,6 +15,10 @@
       <artifactId>quarkus-arc-deployment</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jaxp-deployment</artifactId>
+    </dependency>
+    <dependency>
       <groupId>io.quarkiverse.jgrapht</groupId>
       <artifactId>quarkus-jgrapht</artifactId>
       <version>${project.version}</version>

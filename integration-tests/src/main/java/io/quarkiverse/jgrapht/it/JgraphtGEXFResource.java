@@ -30,6 +30,7 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.nio.Attribute;
 import org.jgrapht.nio.DefaultAttribute;
+import org.jgrapht.nio.ImportException;
 import org.jgrapht.nio.gexf.GEXFAttributeType;
 import org.jgrapht.nio.gexf.GEXFExporter;
 import org.jgrapht.nio.gexf.SimpleGEXFImporter;
@@ -122,6 +123,41 @@ public class JgraphtGEXFResource {
                 .importGraph(graph, new StringReader(input));
 
         return graph.toString();
+    }
+
+    @GET
+    @Path("/import/broken")
+    public String importBrokenGraph() {
+        String input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<gexf xmlns=\"http://www.gexf.net/1.2draft\" "
+                + "      version=\"1.2\" "
+                + "      xsi:schemaLocation=\"http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd\" "
+                + "      xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n"
+                + "  <graph defaultedgetype=\"undirected\">\n"
+                + "    <nodes>\n"
+                + "      <node id=\"1\" label=\"1\"/>\n"
+                + "      <node id=\"2\" label=\"2\"/>\n"
+                + "      <node id=\"3\" label=\"3\"/>\n"
+                + "    </nodes>\n";
+
+        Graph<String, DefaultEdge> graph = GraphTypeBuilder
+                .undirected().weighted(false).allowingMultipleEdges(true).allowingSelfLoops(true)
+                .vertexSupplier(SupplierUtil.createStringSupplier())
+                .edgeSupplier(SupplierUtil.createDefaultEdgeSupplier()).buildGraph();
+
+        try {
+            new SimpleGEXFImporter<String, DefaultEdge>()
+                    .importGraph(graph, new StringReader(input));
+        } catch (ImportException ex) {
+            if (ex.getCause().getMessage().contains("XML document structures must start and end within the same entity.")) {
+                return "OK";
+            } else {
+                ex.printStackTrace();
+                return "FAIL - different cause";
+            }
+        }
+
+        return "FAIL - no ImportException";
     }
 
 }
