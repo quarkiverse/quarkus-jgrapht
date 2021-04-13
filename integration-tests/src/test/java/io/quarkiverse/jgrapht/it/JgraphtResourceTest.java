@@ -14,20 +14,6 @@ import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class JgraphtResourceTest {
-
-    @Test
-    public void testDotExport() {
-        given()
-                .when().get("/jgrapht/dot")
-                .then()
-                .statusCode(200)
-                .body(containsString("www_wikipedia_org"))
-                .body(containsString("label=\"http://www.wikipedia.org\""))
-                .body(containsString("www_jgrapht_org"))
-                .body(containsString("www_google_com"))
-                .body(containsString("www_google_com -> www_wikipedia_org"));
-    }
-
     @Test
     public void testGraphMLExport() {
         given()
@@ -258,6 +244,37 @@ public class JgraphtResourceTest {
     public void testBrokenGraph6Import() {
         given()
                 .when().get("/jgrapht/graph6/import/broken")
+                .then()
+                .statusCode(200)
+                .body(equalTo("OK"));
+    }
+
+    @Test
+    public void testDotExport() {
+        given()
+                .when().get("/jgrapht/dot/export")
+                .then()
+                .statusCode(200)
+                .body(containsString("www_wikipedia_org"))
+                .body(containsString("label=\"http://www.wikipedia.org\""))
+                .body(containsString("www_jgrapht_org"))
+                .body(containsString("www_google_com"))
+                .body(containsString("www_google_com -> www_wikipedia_org"));
+    }
+
+    @Test
+    public void testDotImport() {
+        given()
+                .when().get("/jgrapht/dot/import")
+                .then()
+                .statusCode(200)
+                .body(equalTo("([0, 1, 2, 3], [(0,1), (1,2), (1,3)])"));
+    }
+
+    @Test
+    public void testBrokenDotImport() {
+        given()
+                .when().get("/jgrapht/dot/import/broken")
                 .then()
                 .statusCode(200)
                 .body(equalTo("OK"));
