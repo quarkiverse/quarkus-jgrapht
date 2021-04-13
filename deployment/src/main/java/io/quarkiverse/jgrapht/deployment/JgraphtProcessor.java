@@ -17,7 +17,7 @@ class JgraphtProcessor {
 
     @BuildStep
     NativeImageResourceBuildItem nativeImageResourceBuildItem() {
-        return new NativeImageResourceBuildItem("graphml.xsd", "xlink.xsd");
+        return new NativeImageResourceBuildItem("graphml.xsd", "xlink.xsd", "viz.xsd", "gexf.xsd");
     }
 
     @BuildStep
