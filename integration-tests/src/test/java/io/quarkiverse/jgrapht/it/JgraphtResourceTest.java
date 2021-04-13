@@ -199,4 +199,36 @@ public class JgraphtResourceTest {
                 .statusCode(200)
                 .body(equalTo("OK"));
     }
+
+    private static final String JSON_DEFINITION = "{\"creator\":\"JGraphT JSON Exporter\",\"version\":\"1\",\"nodes\":[{\"id\":\"1\"},{\"id\":\"2\"},{\"id\":\"3\"},{\"id\":\"4\"}],\"edges\":[{\"id\":\"1\",\"source\":\"1\",\"target\":\"2\"},{\"id\":\"2\",\"source\":\"2\",\"target\":\"3\"},{\"id\":\"3\",\"source\":\"3\",\"target\":\"4\"},{\"id\":\"4\",\"source\":\"1\",\"target\":\"4\"}]}";
+
+    @Test
+    public void testJSONExport() {
+        String responseString = given()
+                .when().get("/jgrapht/json/export")
+                .then()
+                .statusCode(200)
+                .extract()
+                .asString();
+        assertEquals(JSON_DEFINITION, responseString);
+    }
+
+    @Test
+    public void testJSONImport() {
+        given()
+                .when().get("/jgrapht/json/import")
+                .then()
+                .statusCode(200)
+                .body(equalTo("([1, 2, 3, 4], [{1,2}, {1,3}, {2,3}])"));
+    }
+
+    @Test
+
+    public void testBrokenJSONImport() {
+        given()
+                .when().get("/jgrapht/json/import/broken")
+                .then()
+                .statusCode(200)
+                .body(equalTo("OK"));
+    }
 }
