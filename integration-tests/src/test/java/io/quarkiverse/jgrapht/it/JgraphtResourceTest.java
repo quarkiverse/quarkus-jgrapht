@@ -231,4 +231,35 @@ public class JgraphtResourceTest {
                 .statusCode(200)
                 .body(equalTo("OK"));
     }
+
+    private static final String GRAPH6_DEFINITION = ":Cda";
+
+    @Test
+    public void testGraph6Export() {
+        String responseString = given()
+                .when().get("/jgrapht/graph6/export")
+                .then()
+                .statusCode(200)
+                .extract()
+                .asString();
+        assertEquals(GRAPH6_DEFINITION, responseString);
+    }
+
+    @Test
+    public void testGraph6Import() {
+        given()
+                .when().get("/jgrapht/graph6/import")
+                .then()
+                .statusCode(200)
+                .body(equalTo("([0, 1, 2, 3, 4, 5, 6], [{0,1}, {0,2}, {1,2}, {5,6}])"));
+    }
+
+    @Test
+    public void testBrokenGraph6Import() {
+        given()
+                .when().get("/jgrapht/graph6/import/broken")
+                .then()
+                .statusCode(200)
+                .body(equalTo("OK"));
+    }
 }
