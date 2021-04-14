@@ -18,6 +18,15 @@ This extension ensures proper behavior in native mode for:
 - JSON import / export
 - Matrix export
 
+## Quarkus ecosystem CI
+ - Overall status:
+   - https://status.quarkus.io/
+ - Issue to track Quarkus JGraphT:
+   - https://github.com/quarkiverse/quarkiverse/issues/38
+ - CI definition:
+   - `quarkiverse-jgrapht` directory in https://github.com/quarkusio/quarkus-ecosystem-ci
+   - [.github/workflows/quarkus-snapshot.yaml](.github/workflows/quarkus-snapshot.yaml) in this repository
+
 [comment]: <> (## Documentation)
 
 [comment]: <> (The documentation for this extension should be maintained as part of this repository and it is stored in the `docs/` directory. )
