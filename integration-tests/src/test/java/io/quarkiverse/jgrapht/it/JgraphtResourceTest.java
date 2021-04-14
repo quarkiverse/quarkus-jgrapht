@@ -288,4 +288,24 @@ public class JgraphtResourceTest {
                 .statusCode(200)
                 .body(equalTo("OK"));
     }
+
+    private static final String LAPLACIAN = "" +
+            "1 1 2\n" +
+            "1 2 -1\n" +
+            "1 3 -1\n" +
+            "2 2 1\n" +
+            "2 1 -1\n" +
+            "3 3 1\n" +
+            "3 1 -1\n";
+
+    @Test
+    public void testMatrixExport() {
+        String responseString = given()
+                .when().get("/jgrapht/matrix/export")
+                .then()
+                .statusCode(200)
+                .extract()
+                .asString();
+        assertEquals(LAPLACIAN, responseString);
+    }
 }
