@@ -1,4 +1,7 @@
 # Quarkus - JGraphT
+
+[![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jgrapht/quarkus-jgrapht?logo=apache-maven&style=for-the-badge)](https://search.maven.org/artifact/io.quarkiverse.jgrapht/quarkus-jgrapht)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -7,9 +10,9 @@
 
 This is the Quarkus extension for [JGraphT](https://jgrapht.org/).
 
-JGraphT works well in the JVM mode and reasonably well in the native mode.
+Vanilla JGraphT works well in the JVM mode and reasonably well in the native mode.
 
-This extension ensures proper behavior in native mode for:
+Quarkus JGraphT extension ensures proper behavior in native mode for:
 - CSV import / export
 - DIMACS import / export
 - DOT import / export
@@ -18,6 +21,15 @@ This extension ensures proper behavior in native mode for:
 - JSON import / export
 - Matrix export
 
+## Coordinates
+
+```xml
+<dependency>
+    <groupId>io.quarkiverse.jgrapht</groupId>
+    <artifactId>quarkus-jgrapht</artifactId>
+    <version>LATEST</version>
+</dependency>
+```
 ## Quarkus ecosystem CI
  - Overall status:
    - https://status.quarkus.io/
