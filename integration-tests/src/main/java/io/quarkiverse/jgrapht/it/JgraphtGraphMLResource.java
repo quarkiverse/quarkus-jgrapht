@@ -33,37 +33,18 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.nio.Attribute;
 import org.jgrapht.nio.AttributeType;
 import org.jgrapht.nio.DefaultAttribute;
+import org.jgrapht.nio.ImportException;
 import org.jgrapht.nio.IntegerIdProvider;
-import org.jgrapht.nio.dot.DOTExporter;
 import org.jgrapht.nio.graphml.GraphMLExporter;
 import org.jgrapht.nio.graphml.GraphMLImporter;
 import org.jgrapht.util.SupplierUtil;
 
-@Path("/jgrapht")
+@Path("/jgrapht/graphml")
 @ApplicationScoped
-public class JgraphtResource {
-    // add some rest methods here
+public class JgraphtGraphMLResource {
 
     @GET
-    @Path("/dot")
-    public String dotExportedGraph() throws URISyntaxException {
-        Graph<URI, DefaultEdge> graph = getURIGraph();
-
-        DOTExporter<URI, DefaultEdge> exporter = new DOTExporter<>(uri -> uri.getHost().replace('.', '_'));
-        // TODO once on Java 11 move to:
-        // exporter.setVertexAttributeProvider(uri -> Map.of("label", DefaultAttribute.createAttribute(uri.toString())));
-        exporter.setVertexAttributeProvider(uri -> {
-            Map<String, Attribute> m = new HashMap<>();
-            m.put("label", DefaultAttribute.createAttribute(uri.toString()));
-            return m;
-        });
-        StringWriter writer = new StringWriter();
-        exporter.exportGraph(graph, writer);
-        return writer.toString();
-    }
-
-    @GET
-    @Path("/graphml/")
+    @Path("/export")
     public String exportGraphML() throws URISyntaxException {
         Graph<URI, DefaultEdge> graph = getURIGraph();
 
@@ -88,7 +69,7 @@ public class JgraphtResource {
     }
 
     @GET
-    @Path("/import/graphml")
+    @Path("/import")
     public String importGraph() throws URISyntaxException {
         Graph<URI, DefaultEdge> graph = getURIGraph();
 
@@ -104,6 +85,38 @@ public class JgraphtResource {
         importer.importGraph(importedGraph, new StringReader(graphAsGraphML));
 
         return importedGraph.toString();
+    }
+
+    @GET
+    @Path("/import/broken")
+    public String importBrokenGraph() throws URISyntaxException {
+        String input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\" " +
+                "xsi:schemaLocation=\"http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd\" "
+                +
+                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+                "    <graph edgedefault=\"directed\">\n" +
+                "        <Tnode id=\"www.google.com\"/>\n" +
+                "    </graph>\n" +
+                "</graphml>";
+
+        Graph<URI, DefaultEdge> importedGraph = new DefaultDirectedGraph(
+                SupplierUtil.createStringSupplier(), SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
+        GraphMLImporter<URI, DefaultEdge> importer = new GraphMLImporter<>();
+        importer.setVertexFactory(stringURI -> URI.create(stringURI));
+
+        try {
+            importer.importGraph(importedGraph, new StringReader(input));
+        } catch (ImportException ex) {
+            if (ex.getCause().getMessage().contains(
+                    "Invalid content was found starting with element '{\"http://graphml.graphdrawing.org/xmlns\":Tnode}'")) {
+                return "OK";
+            } else {
+                ex.printStackTrace();
+                return "FAIL - different cause";
+            }
+        }
+
+        return "FAIL - no ImportException";
     }
 
     private Graph<URI, DefaultEdge> getURIGraph() throws URISyntaxException {

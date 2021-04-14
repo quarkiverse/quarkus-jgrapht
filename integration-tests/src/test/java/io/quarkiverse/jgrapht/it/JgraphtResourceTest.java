@@ -17,7 +17,7 @@ public class JgraphtResourceTest {
     @Test
     public void testGraphMLExport() {
         given()
-                .when().get("/jgrapht/graphml")
+                .when().get("/jgrapht/graphml/export")
                 .then()
                 .statusCode(200)
                 .body(containsString("<node id=\"http://www.wikipedia.org\">"))
@@ -31,13 +31,22 @@ public class JgraphtResourceTest {
     @Test
     public void testGraphMLImport() {
         given()
-                .when().get("/jgrapht/import/graphml")
+                .when().get("/jgrapht/graphml/import")
                 .then()
                 .statusCode(200)
                 .body(containsString("(www.jgrapht.org,www.wikipedia.org)"))
                 .body(containsString("(www.google.com,www.jgrapht.org)"))
                 .body(containsString("(www.google.com,www.wikipedia.org)"))
                 .body(containsString("(www.wikipedia.org,www.google.com)"));
+    }
+
+    @Test
+    public void testBrokenGraphMLImport() {
+        given()
+                .when().get("/jgrapht/graphml/import/broken")
+                .then()
+                .statusCode(200)
+                .body(equalTo("OK"));
     }
 
     private static final String DIRECTED_CSV = ";1;2;3;4;5\n"
