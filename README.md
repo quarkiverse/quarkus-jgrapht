@@ -3,7 +3,7 @@
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jgrapht/quarkus-jgrapht?logo=apache-maven&style=for-the-badge)](https://search.maven.org/artifact/io.quarkiverse.jgrapht/quarkus-jgrapht)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Welcome to Quarkus - JGraphT extension!
@@ -56,6 +56,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://twitter.com/r_svoboda"><img src="https://avatars.githubusercontent.com/u/925259?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rostislav Svoboda</b></sub></a><br /><a href="https://github.com/quarkiverse/quarkus-jgrapht/commits?author=rsvoboda" title="Code">💻</a> <a href="#maintenance-rsvoboda" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="http://gastaldi.wordpress.com"><img src="https://avatars.githubusercontent.com/u/54133?v=4?s=100" width="100px;" alt=""/><br /><sub><b>George Gastaldi</b></sub></a><br /><a href="#infra-gastaldi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
