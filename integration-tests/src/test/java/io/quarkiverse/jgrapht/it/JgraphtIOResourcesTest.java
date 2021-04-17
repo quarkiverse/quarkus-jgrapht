@@ -13,7 +13,7 @@ import org.xmlunit.diff.Diff;
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
-public class JgraphtResourceTest {
+public class JgraphtIOResourcesTest {
     @Test
     public void testGraphMLExport() {
         given()
