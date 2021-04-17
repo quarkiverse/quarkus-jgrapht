@@ -18,6 +18,7 @@ package io.quarkiverse.jgrapht.it;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,17 +63,15 @@ public class JgraphtGEXFResource {
 
         exporter.registerAttribute("color", GEXFExporter.AttributeCategory.NODE, GEXFAttributeType.STRING, null);
         exporter.registerAttribute("city", GEXFExporter.AttributeCategory.NODE, GEXFAttributeType.STRING, null);
-
-        exporter.setVertexAttributeProvider(v -> {
-            Map<String, Attribute> map = new HashMap<String, Attribute>();
-            if ("v1".equals(v)) {
-                map.put("color", DefaultAttribute.createAttribute("Red"));
-                map.put("city", DefaultAttribute.createAttribute("Paris"));
-            }
-            return map;
-        });
-
         exporter.registerAttribute("length", GEXFExporter.AttributeCategory.EDGE, GEXFAttributeType.DOUBLE, null);
+        exporter.setVertexAttributeProvider(v -> {
+            if ("v1".equals(v)) {
+                return Map.of("color", DefaultAttribute.createAttribute("Red"),
+                        "city", DefaultAttribute.createAttribute("Paris"));
+            } else {
+                return Collections.emptyMap();
+            }
+        });
 
         exporter.setEdgeAttributeProvider(e -> {
             Map<String, Attribute> map = new HashMap<String, Attribute>();

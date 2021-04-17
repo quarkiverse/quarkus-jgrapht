@@ -50,11 +50,8 @@ public class JgraphtGraphMLResource {
 
         GraphMLExporter<URI, DefaultEdge> exporter = new GraphMLExporter<>(uri -> uri.toString());
         exporter.setEdgeIdProvider(new IntegerIdProvider<DefaultEdge>(0));
-        exporter.setVertexAttributeProvider(uri -> {
-            Map<String, Attribute> m = new HashMap<>();
-            m.put("host", DefaultAttribute.createAttribute(uri.getHost().replaceAll("www.", "")));
-            return m;
-        });
+        exporter.setVertexAttributeProvider(
+                uri -> Map.of("host", DefaultAttribute.createAttribute(uri.getHost().replaceAll("www.", ""))));
         exporter.setEdgeAttributeProvider(e -> {
             Map<String, Attribute> m = new HashMap<>();
             m.put("edge-name", DefaultAttribute.createAttribute(e.toString()));

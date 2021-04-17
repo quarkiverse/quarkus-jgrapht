@@ -20,7 +20,6 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -31,7 +30,6 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DirectedMultigraph;
-import org.jgrapht.nio.Attribute;
 import org.jgrapht.nio.DefaultAttribute;
 import org.jgrapht.nio.ImportException;
 import org.jgrapht.nio.dot.DOTExporter;
@@ -61,13 +59,7 @@ public class JgraphtDotResource {
         graph.addEdge(wikipedia, google);
 
         DOTExporter<URI, DefaultEdge> exporter = new DOTExporter<>(uri -> uri.getHost().replace('.', '_'));
-        // TODO once on Java 11 move to:
-        // exporter.setVertexAttributeProvider(uri -> Map.of("label", DefaultAttribute.createAttribute(uri.toString())));
-        exporter.setVertexAttributeProvider(uri -> {
-            Map<String, Attribute> m = new HashMap<>();
-            m.put("label", DefaultAttribute.createAttribute(uri.toString()));
-            return m;
-        });
+        exporter.setVertexAttributeProvider(uri -> Map.of("label", DefaultAttribute.createAttribute(uri.toString())));
         StringWriter writer = new StringWriter();
         exporter.exportGraph(graph, writer);
         return writer.toString();
