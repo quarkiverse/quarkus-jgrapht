@@ -14,48 +14,45 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.quarkiverse.jgrapht.it;
+package io.quarkiverse.jgrapht.it.io;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Arrays;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.builder.GraphTypeBuilder;
 import org.jgrapht.nio.ImportException;
-import org.jgrapht.nio.IntegerIdProvider;
-import org.jgrapht.nio.json.JSONExporter;
-import org.jgrapht.nio.json.JSONImporter;
+import org.jgrapht.nio.graph6.Graph6Sparse6Exporter;
+import org.jgrapht.nio.graph6.Graph6Sparse6Importer;
 import org.jgrapht.util.SupplierUtil;
 
-@Path("/jgrapht/json")
+@Path("/jgrapht/graph6")
 @ApplicationScoped
-public class JgraphtJSONResource {
+public class JgraphtGraph6Resource {
 
     @GET
     @Path("/export")
     public String exportGraph() {
-        Graph<Integer, DefaultEdge> graph = GraphTypeBuilder.directed().edgeClass(DefaultEdge.class)
+        Graph<Integer, DefaultEdge> graph = GraphTypeBuilder.undirected().edgeClass(DefaultEdge.class)
                 .vertexSupplier(SupplierUtil.createIntegerSupplier()).allowingMultipleEdges(false)
                 .allowingSelfLoops(false).buildGraph();
 
-        graph.addVertex(1);
-        graph.addVertex(2);
-        graph.addVertex(3);
-        graph.addVertex(4);
+        Graphs.addAllVertices(graph, Arrays.asList(1, 2, 3, 4));
 
         graph.addEdge(1, 2);
         graph.addEdge(2, 3);
         graph.addEdge(3, 4);
         graph.addEdge(1, 4);
 
-        JSONExporter<Integer, DefaultEdge> exporter = new JSONExporter<>(v -> String.valueOf(v));
-        exporter.setEdgeIdProvider(new IntegerIdProvider<>(1));
-
+        Graph6Sparse6Exporter<Integer, DefaultEdge> exporter = new Graph6Sparse6Exporter<>(
+                Graph6Sparse6Exporter.Format.SPARSE6);
         StringWriter w = new StringWriter();
         exporter.exportGraph(graph, w);
 
@@ -65,25 +62,13 @@ public class JgraphtJSONResource {
     @GET
     @Path("/import")
     public String importGraph() {
-        String input = "{\n"
-                + "  \"nodes\": [\n"
-                + "  { \"id\":\"1\" },\n"
-                + "  { \"id\":\"2\" },\n"
-                + "  { \"id\":\"3\" },\n"
-                + "  { \"id\":\"4\" }\n"
-                + "  ],\n"
-                + "  \"edges\": [\n"
-                + "  { \"source\":\"1\", \"target\":\"2\", \"weight\": 2.0 },\n"
-                + "  { \"source\":\"1\", \"target\":\"3\", \"weight\": 3.0 },\n"
-                + "  { \"source\":\"2\", \"target\":\"3\" }\n"
-                + "  ]\n"
-                + "}";
+        String input = ":Fa@x^\n";
 
-        Graph<String, DefaultEdge> graph = GraphTypeBuilder
-                .undirected().allowingMultipleEdges(true).allowingSelfLoops(true).weighted(true)
-                .vertexSupplier(SupplierUtil.createStringSupplier(1))
-                .edgeSupplier(SupplierUtil.DEFAULT_EDGE_SUPPLIER).buildGraph();
-        new JSONImporter<String, DefaultEdge>()
+        Graph<Integer, DefaultEdge> graph = GraphTypeBuilder
+                .undirected().allowingMultipleEdges(true).allowingSelfLoops(true).weighted(false)
+                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class).buildGraph();
+
+        new Graph6Sparse6Importer<Integer, DefaultEdge>()
                 .importGraph(graph, new StringReader(input));
         return graph.toString();
     }
@@ -91,26 +76,23 @@ public class JgraphtJSONResource {
     @GET
     @Path("/import/broken")
     public String importBrokenGraph() {
-        String input = "{\n"
-                + "  \"nodes\": [\n"
-                + "  { \"id\":\"1\" },\n"
-                + "  { \"id\":";
-        Graph<String, DefaultEdge> graph = GraphTypeBuilder
-                .undirected().allowingMultipleEdges(true).allowingSelfLoops(true).weighted(true)
-                .vertexSupplier(SupplierUtil.createStringSupplier(1))
-                .edgeSupplier(SupplierUtil.DEFAULT_EDGE_SUPPLIER).buildGraph();
+        String input = ":%";
+
+        Graph<Integer, DefaultEdge> graph = GraphTypeBuilder
+                .undirected().allowingMultipleEdges(true).allowingSelfLoops(true).weighted(false)
+                .vertexSupplier(SupplierUtil.createIntegerSupplier()).edgeClass(DefaultEdge.class).buildGraph();
+
         try {
-            new JSONImporter<String, DefaultEdge>()
+            new Graph6Sparse6Importer<Integer, DefaultEdge>()
                     .importGraph(graph, new StringReader(input));
         } catch (ImportException ex) {
-            if (ex.getCause().getMessage().contains("mismatched input '<EOF>'")) {
+            if (ex.getMessage().contains("Illegal character detected")) {
                 return "OK";
             } else {
                 ex.printStackTrace();
                 return "FAIL - different cause";
             }
         }
-
         return "FAIL - no ImportException";
     }
 

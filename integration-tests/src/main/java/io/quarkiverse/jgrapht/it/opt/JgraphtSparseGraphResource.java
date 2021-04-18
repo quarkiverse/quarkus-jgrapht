@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.quarkiverse.jgrapht.it;
+package io.quarkiverse.jgrapht.it.opt;
 
 import java.io.StringWriter;
 import java.util.Arrays;
