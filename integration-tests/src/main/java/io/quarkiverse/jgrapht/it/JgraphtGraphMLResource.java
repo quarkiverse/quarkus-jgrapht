@@ -75,8 +75,15 @@ public class JgraphtGraphMLResource {
         exporter.exportGraph(graph, writer);
         String graphAsGraphML = writer.toString();
 
-        Graph<URI, DefaultEdge> importedGraph = new DefaultDirectedGraph(
-                SupplierUtil.createStringSupplier(), SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
+        Graph<URI, DefaultEdge> importedGraph = new DefaultDirectedGraph<>(
+                () -> {
+                    try {
+                        return new URI("http://TBD");
+                    } catch (URISyntaxException e) {
+                        return null;
+                    }
+                },
+                SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
         GraphMLImporter<URI, DefaultEdge> importer = new GraphMLImporter<>();
         importer.setVertexFactory(stringURI -> URI.create(stringURI));
         importer.importGraph(importedGraph, new StringReader(graphAsGraphML));
@@ -96,8 +103,15 @@ public class JgraphtGraphMLResource {
                 "    </graph>\n" +
                 "</graphml>";
 
-        Graph<URI, DefaultEdge> importedGraph = new DefaultDirectedGraph(
-                SupplierUtil.createStringSupplier(), SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
+        Graph<URI, DefaultEdge> importedGraph = new DefaultDirectedGraph<>(
+                () -> {
+                    try {
+                        return new URI("http://TBD");
+                    } catch (URISyntaxException e) {
+                        return null;
+                    }
+                },
+                SupplierUtil.DEFAULT_EDGE_SUPPLIER, false);
         GraphMLImporter<URI, DefaultEdge> importer = new GraphMLImporter<>();
         importer.setVertexFactory(stringURI -> URI.create(stringURI));
 
