@@ -85,4 +85,43 @@ public class JgraphtUnimiResourcesTest {
         assertTrue(responseLength > 1024 * 1024, "Response has short length, just " + responseLength + " bytes");
     }
 
+    @Test
+    public void testWebGraphUndirected() {
+        given()
+                .when().get("/jgrapht/webgraph/undirected")
+                .then()
+                .statusCode(200)
+                .body(containsString("  3 -- 4;\n" +
+                        "  2 -- 2;\n" +
+                        "  2 -- 4;\n" +
+                        "  1 -- 3;\n" +
+                        "  1 -- 2;\n" +
+                        "  4 -- 4;\n"));
+    }
+
+    @Test
+    public void testWebGraphDirected() {
+        Response response = given().when().get("/jgrapht/webgraph/directed");
+        int responseLength = response.asByteArray().length;
+        assertTrue(responseLength > 256 * 1024, "Response has short length, just " + responseLength + " bytes");
+    }
+
+    @Test
+    public void testEFGraphStore() {
+        given()
+                .when().get("/jgrapht/webgraph/store")
+                .then()
+                .statusCode(200)
+                .body(containsString("JgraphtWebGraphResource"));
+    }
+
+    @Test
+    public void testBigEFGraphStore() {
+        given()
+                .when().get("/jgrapht/webgraph/store/big")
+                .then()
+                .statusCode(200)
+                .body(containsString("JgraphtWebGraphResource"));
+    }
+
 }
