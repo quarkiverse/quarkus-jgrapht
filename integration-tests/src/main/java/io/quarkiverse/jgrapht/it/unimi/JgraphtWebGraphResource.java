@@ -35,6 +35,7 @@ import it.unimi.dsi.webgraph.examples.ErdosRenyiGraph;
 
 @Path("/jgrapht/webgraph")
 @ApplicationScoped
+@SuppressWarnings("unchecked")
 public class JgraphtWebGraphResource {
 
     @GET

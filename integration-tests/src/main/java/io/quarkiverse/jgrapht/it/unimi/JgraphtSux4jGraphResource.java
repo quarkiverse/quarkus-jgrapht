@@ -37,6 +37,7 @@ import org.jgrapht.util.SupplierUtil;
 
 @Path("/jgrapht/sux4j")
 @ApplicationScoped
+@SuppressWarnings("unchecked")
 public class JgraphtSux4jGraphResource {
 
     @GET
