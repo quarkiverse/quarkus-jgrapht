@@ -13,13 +13,20 @@ This is the Quarkus extension for [JGraphT](https://jgrapht.org/).
 Vanilla JGraphT works well in the JVM mode and reasonably well in the native mode.
 
 Quarkus JGraphT extension ensures proper behavior in native mode for:
-- CSV import / export
-- DIMACS import / export
-- DOT import / export
-- GEXF import / export
-- GraphML import / export
-- JSON import / export
-- Matrix export
+- jgrapht-io
+  - CSV import / export
+  - DIMACS import / export
+  - DOT import / export
+  - GEXF import / export
+  - GraphML import / export
+  - JSON import / export
+  - Matrix export
+- jgrapht-opt
+  - Fastutil graphs
+  - Sparse graphs
+- jgrapht-unimi-dsi
+  - Succinct graphs
+  - WebGraph graphs
 
 ## Coordinates
 
