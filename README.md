@@ -2,6 +2,8 @@
 
 [![Version](https://img.shields.io/maven-central/v/io.quarkiverse.jgrapht/quarkus-jgrapht?logo=apache-maven&style=for-the-badge)](https://search.maven.org/artifact/io.quarkiverse.jgrapht/quarkus-jgrapht)
 
+[![Quarkus ecosystem CI](https://github.com/quarkiverse/quarkus-jgrapht/actions/workflows/quarkus-snapshot.yaml/badge.svg)](https://github.com/quarkiverse/quarkus-jgrapht/actions/workflows/quarkus-snapshot.yaml)
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
