@@ -58,6 +58,17 @@
         </exclusions>
       </dependency>
       <dependency>
+        <groupId>org.jgrapht</groupId>
+        <artifactId>jgrapht-guava</artifactId>
+        <version>${jgrapht.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
         <groupId>org.xmlunit</groupId>
         <artifactId>xmlunit-core</artifactId>
         <version>${xmlunit.version}</version>

@@ -29,6 +29,11 @@ Quarkus JGraphT extension ensures proper behavior in native mode for:
 - jgrapht-unimi-dsi
   - Succinct graphs
   - WebGraph graphs
+- jgrapht-guava
+  - Immutable Graph Adapter
+  - Immutable Network Adapter
+  - Mutable Graph Adapter
+  - Mutable Network Adapter
 
 ## Coordinates
 
