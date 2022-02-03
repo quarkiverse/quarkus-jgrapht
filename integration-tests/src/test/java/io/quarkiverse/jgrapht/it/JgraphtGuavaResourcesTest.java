@@ -4,7 +4,10 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.greaterThan;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -57,15 +60,16 @@ public class JgraphtGuavaResourcesTest {
     }
 
     private void testDirectedRandom(String path) {
-        String firstResponseString = given()
-                .when().get(path)
-                .then().statusCode(200)
-                .extract().asString();
-        String secondResponseString = given()
-                .when().get(path)
-                .then().statusCode(200)
-                .extract().asString();
-        assertThat(firstResponseString, not(equalTo(secondResponseString)));
+        ArrayList<String> responseStrings = new ArrayList<>(20);
+        for (int i = 0; i < 10; i++) {
+            String responseString = given()
+                    .when().get(path)
+                    .then().statusCode(200)
+                    .extract().asString();
+            responseStrings.add(i, responseString);
+        }
+        // If we convert a List to a HashSet and the resulting size is less than or equal to 1, then we know that all elements in the list are equal
+        assertThat(new HashSet<>(responseStrings).size(), greaterThan(1));
     }
 
     @Test
