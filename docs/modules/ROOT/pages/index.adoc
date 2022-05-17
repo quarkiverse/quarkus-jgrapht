@@ -1,4 +1,4 @@
-= Quarkus - JGraphT
+= Quarkus JGraphT
 :extension-status: preview
 
 Describe what the extension does here.
@@ -16,7 +16,3 @@ In your `pom.xml` file, add:
 </dependency>
 ----
 
-[[extension-configuration-reference]]
-== Extension Configuration Reference
-
-include::config.adoc[leveloffset=+1, opts=optional]
