@@ -1,5 +1,5 @@
 name: quarkus-jgrapht
-title: Quarkus - JGraphT
+title: Quarkus JGraphT
 version: dev
 nav:
   - modules/ROOT/nav.adoc
