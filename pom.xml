@@ -25,7 +25,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>2.16.0.Final</quarkus.version>
-    <xmlunit.version>2.9.0</xmlunit.version>
+    <xmlunit.version>2.9.1</xmlunit.version>
   </properties>
   <dependencyManagement>
     <dependencies>
