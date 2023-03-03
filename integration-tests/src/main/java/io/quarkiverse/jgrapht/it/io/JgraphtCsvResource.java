@@ -20,9 +20,9 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.function.Function;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;

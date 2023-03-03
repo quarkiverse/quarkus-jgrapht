@@ -21,9 +21,9 @@ import static io.quarkiverse.jgrapht.it.guava.JgraphtGuavaUtils.generateGraphCon
 import static io.quarkiverse.jgrapht.it.guava.JgraphtGuavaUtils.generateRandomGraphContent;
 import static io.quarkiverse.jgrapht.it.guava.JgraphtGuavaUtils.getGraphAsDot;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 import org.jgrapht.Graph;
 import org.jgrapht.alg.interfaces.VertexCoverAlgorithm;

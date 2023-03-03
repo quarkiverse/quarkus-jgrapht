@@ -19,9 +19,9 @@ package io.quarkiverse.jgrapht.it.unimi;
 import java.io.StringWriter;
 import java.util.function.Supplier;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 import org.jgrapht.generate.GnpRandomGraphGenerator;
 import org.jgrapht.graph.AbstractBaseGraph;

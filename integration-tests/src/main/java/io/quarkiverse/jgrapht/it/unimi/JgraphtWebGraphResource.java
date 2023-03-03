@@ -19,9 +19,9 @@ package io.quarkiverse.jgrapht.it.unimi;
 import java.io.File;
 import java.io.StringWriter;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
 
 import org.jgrapht.nio.dot.DOTExporter;
 import org.jgrapht.webgraph.ImmutableDirectedBigGraphAdapter;
