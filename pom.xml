@@ -17,7 +17,7 @@
   </modules>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <jgrapht.version>1.5.1</jgrapht.version>
+    <jgrapht.version>1.5.2</jgrapht.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.source>11</maven.compiler.source>
