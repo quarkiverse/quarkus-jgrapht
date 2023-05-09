@@ -17,7 +17,7 @@
   </modules>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <jgrapht.version>1.5.1</jgrapht.version>
+    <jgrapht.version>1.5.2</jgrapht.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.release>11</maven.compiler.release>
     <maven.compiler.source>11</maven.compiler.source>
@@ -29,12 +29,6 @@
   </properties>
   <dependencyManagement>
     <dependencies>
-      <!-- Temporary workaround: JGraphT needs to upgrade to ANTLR 4.10+ to align with Quarkus-->
-      <dependency>
-        <groupId>org.antlr</groupId>
-        <artifactId>antlr4-runtime</artifactId>
-        <version>4.9.3</version>
-      </dependency>
       <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-bom</artifactId>
