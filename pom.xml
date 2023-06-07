@@ -15,6 +15,11 @@
     <module>deployment</module>
     <module>runtime</module>
   </modules>
+  <scm>
+    <connection>scm:git:git@github.com:quarkiverse/quarkus-jgrapht.git</connection>
+    <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jgrapht.git</developerConnection>
+    <url>https://github.com/quarkiverse/quarkus-jgrapht</url>
+  </scm>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <jgrapht.version>1.5.2</jgrapht.version>
