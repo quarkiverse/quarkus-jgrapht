@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.quarkiverse.jgrapht</groupId>
     <artifactId>quarkus-jgrapht-parent</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1-SNAPSHOT</version>
   </parent>
   <artifactId>quarkus-jgrapht-deployment</artifactId>
   <name>Quarkus - JGraphT - Deployment</name>
