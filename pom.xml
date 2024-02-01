@@ -25,9 +25,7 @@
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
     <jgrapht.version>1.5.2</jgrapht.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.release>11</maven.compiler.release>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.version>3.7.1</quarkus.version>
