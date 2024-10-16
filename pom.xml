@@ -8,7 +8,7 @@
   </parent>
   <groupId>io.quarkiverse.jgrapht</groupId>
   <artifactId>quarkus-jgrapht-parent</artifactId>
-  <version>1.4.1</version>
+  <version>1.4.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Quarkus - JGraphT - Parent</name>
   <modules>
@@ -19,7 +19,7 @@
     <connection>scm:git:git@github.com:quarkiverse/quarkus-jgrapht.git</connection>
     <developerConnection>scm:git:git@github.com:quarkiverse/quarkus-jgrapht.git</developerConnection>
     <url>https://github.com/quarkiverse/quarkus-jgrapht</url>
-    <tag>1.4.1</tag>
+    <tag>HEAD</tag>
   </scm>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
