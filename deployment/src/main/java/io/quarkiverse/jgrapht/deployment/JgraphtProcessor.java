@@ -22,7 +22,7 @@ class JgraphtProcessor {
 
     @BuildStep
     void reflectiveClasses(BuildProducer<ReflectiveClassBuildItem> reflectiveClass) {
-        reflectiveClass.produce(new ReflectiveClassBuildItem(true, false,
-                "it.unimi.dsi.big.webgraph.EFGraph", "it.unimi.dsi.webgraph.EFGraph"));
+        reflectiveClass.produce(ReflectiveClassBuildItem.builder(
+                "it.unimi.dsi.big.webgraph.EFGraph", "it.unimi.dsi.webgraph.EFGraph").constructors().methods().build());
     }
 }
