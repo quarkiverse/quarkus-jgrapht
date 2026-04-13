@@ -23,7 +23,7 @@
   </scm>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <jgrapht.version>1.5.2</jgrapht.version>
+    <jgrapht.version>1.5.3</jgrapht.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
